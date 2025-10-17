@@ -41,4 +41,4 @@ Economizar tempo e evitar erros ao registrar as máquinas no AnyDesk Administrat
 
 ## Autor
 
-Seu Nome - Automação desenvolvida internamente com ajuda de IA.
+João (John201ab) - Automação desenvolvida internamente com ajuda de IA.
