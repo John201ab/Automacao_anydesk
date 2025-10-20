@@ -39,21 +39,17 @@ resultados = []
 for _, row in csv_df.iterrows():
     nome_csv = row["nome_limpo"]
     resultado_match = process.extractOne(nome_csv, excel_df["nome_limpo"], score_cutoff=80)
-    # Adicionando print para depuração
     print(f"Resultado para '{nome_csv}': {resultado_match}")
-    # Verificação segura
     if resultado_match and isinstance(resultado_match, tuple):
         match, score = resultado_match[:2]
         linha_excel = excel_df[excel_df["nome_limpo"] == match].iloc[0]
         resultados.append({
             "codigo_anydesk": row["cid"],
-            "alias": row["alias"],
-            "nome_usuario": linha_excel["nome_usuario"],
-            "setor": linha_excel["setor"]
+            "nome_usuario": linha_excel["nome_usuario"]
         })
 
-# ==== 6. Exportar resultado ====
-resultado_df = pd.DataFrame(resultados)
+# ==== 6. Exportar resultado (somente duas colunas) ====
+resultado_df = pd.DataFrame(resultados, columns=["codigo_anydesk", "nome_usuario"])
 resultado_df.to_excel(arquivo_saida, index=False)
 
 print(f"✅ Arquivo '{arquivo_saida}' criado com {len(resultado_df)} correspondências.")
